@@ -52,9 +52,10 @@ export default function Firebase() {
     callbacks: {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
         // User successfully signed in.
+        console.log(authResult);
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
-        return true;
+        return false;
       },
       uiShown: function () {
         // The widget is rendered.
