@@ -12,5 +12,6 @@ CREATE TABLE park(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     hyperlink TEXT NOT NULL,
+    reviewCount INTEGER NOT NULL,
     stars INTEGER NOT NULL
 );
