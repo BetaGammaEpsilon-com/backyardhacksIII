@@ -22,5 +22,12 @@ view database:
 run app:
 `flask run -p 3000`
 
+## Docker Container
+to build image
+`docker build --tag parkcheck . `
+to deploy container
+`docker run -d --name parkcheck -p 3000:3000 parkcheck`
+
+
 ## National park API
 place token.txt in backend/api/natpark/

@@ -19,6 +19,6 @@ ENV FLASK_ENV=development
 
 CMD ["source","venv/bin/activate"]
 CMD ["source", "./setup"]
-CMD ["flask", "db-init"]
-CMD ["flask", "db-fill"]
-CMD ["flask", "run","-h", "0.0.0.0", "-p", "3000"]
+ENTRYPOINT [ "python" ]
+
+CMD [ "app.py" ]
