@@ -53,9 +53,18 @@ def db_init_command():
     click.echo("Initilized databse")
 
 
+@click.command('db-fill')
+@with_appcontext
+def db_fill():
+    #TODO make funtion to fill in database with NatPark
+    #Call NPS grabber
+    #place values into SQL table
+    click.echo("Filling database")
+
 def app_init(app):
     app.teardown_appcontext(db_close)
     app.cli.add_command(db_init_command)
+    app.cli.add_command(db_fill)
 
 
 
