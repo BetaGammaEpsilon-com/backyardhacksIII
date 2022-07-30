@@ -45,10 +45,8 @@ def selectAll():
 
     conn.close()
 
-    for tup in response:
-        print(tup[0])
-
     return response
+
 # select all values from db
 @click.command('db-select-all')
 @with_appcontext
