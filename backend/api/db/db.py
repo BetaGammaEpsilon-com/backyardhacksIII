@@ -7,6 +7,7 @@ from flask.cli import with_appcontext
 
 DATABASE = 'resources/database.db'
 SQLDATABASE = 'api/db/sql/'
+file_path = SQLDATABASE + 'parks.sql'
 
 
 def db_connect():
@@ -31,7 +32,7 @@ def db_close(e=None):
 def db_init():
     conn = db_connect()
 
-    file_path = SQLDATABASE + 'userstars.sql'
+
 
     with current_app.open_resource(file_path) as f:
         conn.executescript(f.read().decode('utf8'))
