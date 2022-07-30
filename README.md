@@ -7,3 +7,7 @@
 `setup.sh` initializes environment variables
 
 `pip install -r requirements.txt` installed required packages to virtural environment
+
+## Database init
+
+`flask db-init`

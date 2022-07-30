@@ -31,7 +31,7 @@ def db_close(e=None):
 def db_init():
     conn = db_connect()
 
-    file_path = SQLDATABASE + 'schema.sql'
+    file_path = SQLDATABASE + 'userstars.sql'
 
     with current_app.open_resource(file_path) as f:
         conn.executescript(f.read().decode('utf8'))
