@@ -14,10 +14,11 @@ const Title = styled.p`
 `;
 
 export default function ParkPanel(props) {
+  console.log(props);
   return (
     <Panel className="park-panel">
-      <Checkbox type="checkbox" />
-      <Title>Park Name</Title>
+      <Checkbox type="checkbox" checked={props.data.completed} />
+      <Title>{props.data.name}</Title>
       <Rating />
     </Panel>
   );
