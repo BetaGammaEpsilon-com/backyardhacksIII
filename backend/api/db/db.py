@@ -35,6 +35,7 @@ def db_close(e=None):
 @click.command('db-select-all')
 @with_appcontext
 def db_select_all():
+    print('calling?')
     conn = db_connect()
 
     cursor = conn.cursor()
@@ -45,9 +46,12 @@ def db_select_all():
 
     conn.close()
 
-    print(response)
+    for tup in response:
+        print(tup[0])
 
     return response
+
+#TODO: select a single row
 
 #inits database
 def db_init():

@@ -33,8 +33,7 @@ class NatPark:
             'stars': self.stars
         }
 
-
-    #TODO be able to convert this to be able to insert it into a sql database
+    # able to insert into sql table
     def sqlify(self):
         return (
             'id,name,url,reviewCount,stars',
