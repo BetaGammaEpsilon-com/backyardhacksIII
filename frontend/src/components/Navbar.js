@@ -67,10 +67,10 @@ export default function Navbar(props) {
           ></img>
         </Link>
         <div id="nav-bar-text" style={NavBarTextStyle}>
-          <NavLink to="/" style={{ textDecoration: "none" }} smooth={true}>
+          <NavLink to="/" style={{ textDecoration: "none" }}>
             <NavLinkText>Home</NavLinkText>
           </NavLink>
-          <Link to="checklist" style={{ textDecoration: "none" }} smooth={true}>
+          <Link to="checklist" style={{ textDecoration: "none" }}>
             <NavLinkText>Checklist</NavLinkText>
           </Link>
           {/* <Link>Map</Link>

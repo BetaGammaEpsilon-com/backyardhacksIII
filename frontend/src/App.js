@@ -20,6 +20,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/checklist" element={<Checklist />} />
       </Routes>
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader">Loading...</div>
     </div>
   );
 }
