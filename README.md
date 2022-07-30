@@ -17,7 +17,10 @@ fill database:
 `flask db-fill`
 
 view database:  
-`flask db-select-all
+`flask db-select-all`
+
+run app:
+`flask run -p 3000`
 
 ## National park API
 place token.txt in backend/api/natpark/

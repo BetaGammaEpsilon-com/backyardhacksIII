@@ -31,11 +31,10 @@ def db_close(e=None):
     if conn is not None:
         conn.close()
 
-# select all values from db
-@click.command('db-select-all')
-@with_appcontext
-def db_select_all():
-    print('calling?')
+
+#select all
+def selectAll():
+
     conn = db_connect()
 
     cursor = conn.cursor()
@@ -50,6 +49,11 @@ def db_select_all():
         print(tup[0])
 
     return response
+# select all values from db
+@click.command('db-select-all')
+@with_appcontext
+def db_select_all():
+    return selectAll()
 
 #TODO: select a single row
 
