@@ -1,6 +1,7 @@
 // Import packages
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 // Import components
 import ParkPanel from "../components/ParkPanel";
@@ -15,6 +16,20 @@ const CategoryPanel = styled.div`
 `;
 
 export default function Checklist() {
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchParks = async () => {
+      const result = await axios("https://parkcheck.tech/parks/");
+
+      let returnedData = result.data;
+      console.log(result.data);
+      setData(returnedData);
+    };
+
+    fetchParks();
+  }, []);
+
   let completedParks = {};
   let uncompletedParks = {};
 
