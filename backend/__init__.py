@@ -3,6 +3,7 @@ import os
 from backend.api.db import db
 
 
+#Barebones for the flask app
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
