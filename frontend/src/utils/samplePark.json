@@ -1,0 +1,14 @@
+{
+  "Acadia": {
+    "name": "Acadia",
+    "completed": true
+  },
+  "Yosemite": {
+    "name": "Yosemite",
+    "completed": false
+  },
+  "Redwoods": {
+    "name": "Redwoods",
+    "completed": true
+  }
+}
