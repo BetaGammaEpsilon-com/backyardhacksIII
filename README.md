@@ -10,7 +10,14 @@
 
 ## Database init
 
+create databse:  
 `flask db-init`
+
+fill database:  
+`flask db-fill`
+
+view database:  
+`flask db-select-all
 
 ## National park API
 place token.txt in backend/api/natpark/

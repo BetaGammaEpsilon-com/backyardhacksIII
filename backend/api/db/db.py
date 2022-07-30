@@ -5,6 +5,7 @@ from flask import Flask
 from flask import current_app, g
 from flask.cli import with_appcontext
 from backend.api.natpark.NatPark import NatPark
+from backend.api.natpark.NPSGrabber import fillDatabase
 
 DATABASE = 'resources/database.db'
 SQLDATABASE = 'api/db/sql/'
@@ -30,6 +31,23 @@ def db_close(e=None):
     if conn is not None:
         conn.close()
 
+# select all values from db
+@click.command('db-select-all')
+@with_appcontext
+def db_select_all():
+    conn = db_connect()
+
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT * FROM park;')
+
+    response = cursor.fetchall()
+
+    conn.close()
+
+    print(response)
+
+    return response
 
 #inits database
 def db_init():
@@ -38,12 +56,17 @@ def db_init():
     with current_app.open_resource(file_path) as f:
         conn.executescript(f.read().decode('utf8'))
 
-#TODO be able to insert into database
-def inset(park: NatPark):
+def insert_park(park: NatPark):
     conn = db_connect()
 
     cursor = conn.cursor()
 
+    col, val = park.sqlify()
+
+    # add park into db or throw exception
+    cursor.execute("INSERT INTO park VALUES (?, ?, ?, ?, ?)", val)
+    
+    conn.commit()
 
 #inits database on the commandline
 @click.command('db-init')
@@ -56,15 +79,21 @@ def db_init_command():
 @click.command('db-fill')
 @with_appcontext
 def db_fill():
-    #TODO make funtion to fill in database with NatPark
     #Call NPS grabber
     #place values into SQL table
     click.echo("Filling database")
+    all_parks = fillDatabase()
+
+    col, val = all_parks[0].sqlify()
+
+    for park in all_parks:
+        insert_park(park)
+
+    db_close()
+    
 
 def app_init(app):
     app.teardown_appcontext(db_close)
     app.cli.add_command(db_init_command)
     app.cli.add_command(db_fill)
-
-
-
+    app.cli.add_command(db_select_all)

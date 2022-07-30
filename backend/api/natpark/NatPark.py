@@ -10,11 +10,33 @@ class NatPark:
         self.reviewCount = -1
         self.stars = -1
 
+    # override tostring
+    def __str__(self):
+        return f'ID: {self.id}, NAME: {self.name}, URL: {self.url}, REVIEW_COUNT: {self.reviewCount}, STARS: {self.stars}'
+
+    # override string object representation
+    def __repr__(self):
+        return f'ID: {self.id}, NAME: {self.name}, URL: {self.url}, REVIEW_COUNT: {self.reviewCount}, STARS: {self.stars}'
+
     def printPark(self):
         print("ID: " + str(self.id) + "\nName: "
               + self.name, "\nURL: "
               + self.url + "\n")
 
+    # serialize into JSON format
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'url': self.url,
+            'reviewCount': self.reviewCount,
+            'stars': self.stars
+        }
+
+
     #TODO be able to convert this to be able to insert it into a sql database
     def sqlify(self):
-        pass
+        return (
+            'id,name,url,reviewCount,stars',
+            (None,self.name,self.url,self.reviewCount,self.stars)
+        )

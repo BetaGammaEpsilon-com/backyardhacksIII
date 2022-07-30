@@ -1,10 +1,10 @@
 import requests
 import json
-from NatPark import NatPark
+from backend.api.natpark.NatPark import NatPark
 
 PARKNUMBER = 467
 
-tokenfile = open("token.txt", 'r')
+tokenfile = open("resources/token.txt", 'r')
 token = tokenfile.readline().rstrip()
 
 #API call barebones
