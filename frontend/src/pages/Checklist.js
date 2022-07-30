@@ -9,7 +9,7 @@ import ParkPanel from "../components/ParkPanel";
 import sampleData from "../utils/samplePark.json";
 
 const CategoryPanel = styled.div`
-  background-color: green;
+  background-color: ${(props) => props.theme.colors.green};
   font-size: 3rem;
   color: ${(props) => props.theme.colors.pureWhite};
 `;

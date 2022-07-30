@@ -4,7 +4,8 @@ const theme = {
     darkBrown: "#99542c", //Dark brown
     pureWhite: "#FFFFFF", //All white text, accents, and many backgrounds
     pureBlack: "#000000", //All dark text
-    green: "#2d4b1e", //Dark green
+    green: "#809b52", //Dark green
+    tan: "#e6d6a6", //tan logo color
   },
 };
 
