@@ -1,6 +1,6 @@
 // Import packages
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, renderMatches } from "react-router-dom";
 import styled from "styled-components";
 
 // Import assets
@@ -44,6 +44,26 @@ const NavBarTextStyle = {
   color: "white",
 };
 
+function NavLinkNew(props) {
+  const activeStyle = {
+    textDecoration: "none",
+    textColor: "black",
+  };
+
+  const unactiveStyle = {
+    textDecoration: "none",
+  };
+
+  return (
+    <NavLink
+      to={props.path}
+      style={({ isActive }) => (isActive ? activeStyle : unactiveStyle)}
+    >
+      <NavLinkText>{props.text}</NavLinkText>
+    </NavLink>
+  );
+}
+
 // TODO: Create component for Navigation bar link that includes the NavLink component, the text, and styles. Have the active class keep the item colored
 
 export default function Navbar(props) {
@@ -67,15 +87,10 @@ export default function Navbar(props) {
           ></img>
         </Link>
         <div id="nav-bar-text" style={NavBarTextStyle}>
-          <NavLink to="/" style={{ textDecoration: "none" }}>
-            <NavLinkText>Home</NavLinkText>
-          </NavLink>
-          <Link to="checklist" style={{ textDecoration: "none" }}>
-            <NavLinkText>Checklist</NavLinkText>
-          </Link>
-          {/* <Link>Map</Link>
-        <Link>Login</Link>
-        <Link>Settings</Link> */}
+          <NavLinkNew path="/" text="Home" />
+          <NavLinkNew path="/checklist" text="Checklist" />
+          <NavLinkNew path="/login" text="Login" />
+          {/* <Link>Settings</Link> */}
         </div>
       </div>
     </Nav>
