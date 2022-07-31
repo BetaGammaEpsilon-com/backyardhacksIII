@@ -45,13 +45,23 @@ export default function Login() {
 
   firebaseAuth.onAuthStateChanged((user) => {
     console.log(user);
+    if (user)
+      document.getElementById("log-out-button").style.display = "inline-block";
+    else document.getElementById("log-out-button").style.display = "none";
   });
+
+  function logOut() {
+    firebaseAuth.signOut();
+  }
 
   return (
     <>
       <div id="firebaseui-auth-container"></div>
       <div id="loader">Loading...</div>
       {/* <p id="sign-in-status">sample text</p> */}
+      <button onClick={logOut} id="log-out-button">
+        Log Out
+      </button>
     </>
   );
 }
