@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "firebase/compat/app";
+import { firebaseApp } from "../Firebase"; //Needed for other firebase components to reference the app
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 
