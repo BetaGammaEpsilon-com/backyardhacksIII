@@ -6,7 +6,7 @@ export default function Login() {
     <>
       <div id="firebaseui-auth-container"></div>
       <div id="loader">Loading...</div>
-      <p id="sign-in-status">sample text</p>
+      {/* <p id="sign-in-status">sample text</p> */}
     </>
   );
 }
