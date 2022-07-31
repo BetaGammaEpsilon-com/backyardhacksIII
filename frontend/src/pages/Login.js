@@ -1,10 +1,10 @@
 import React from "react";
 import firebase from "firebase/compat/app";
-import { firebaseApp } from "../Firebase"; //Needed for other firebase components to reference the app
+import { firebaseApp, firebaseAuth } from "../Firebase"; //Needed for other firebase components to reference the app
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 
-var firebaseUi = new firebaseui.auth.AuthUI(firebase.auth());
+var firebaseUi = new firebaseui.auth.AuthUI(firebaseAuth);
 
 var FirebaseUiConfig = {
   callbacks: {
@@ -12,7 +12,7 @@ var FirebaseUiConfig = {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
-      return true;
+      return false;
     },
     uiShown: function () {
       // The widget is rendered.
@@ -42,6 +42,10 @@ export default function Login() {
   React.useEffect(() => {
     firebaseUi.start("#firebaseui-auth-container", FirebaseUiConfig);
   }, []);
+
+  firebaseAuth.onAuthStateChanged((user) => {
+    console.log(user);
+  });
 
   return (
     <>
