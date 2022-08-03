@@ -1,7 +1,9 @@
 // Import packages
 import React from "react";
+import { useState } from "react";
 import { Link, NavLink, renderMatches } from "react-router-dom";
 import styled from "styled-components";
+import { firebaseApp, firebaseAuth } from "../Firebase"; //Needed for other firebase components to reference the app
 
 // Import assets
 import logo from "../assets/images/compassLogo.svg";
@@ -45,6 +47,9 @@ const NavBarTextStyle = {
 };
 
 function NavLinkNew(props) {
+  //0 is signed out, 1 is signed in
+  const [signInOutState, setSignInOutState] = useState(0);
+
   const activeStyle = {
     textDecoration: "none",
     textColor: "black",
@@ -54,10 +59,31 @@ function NavLinkNew(props) {
     textDecoration: "none",
   };
 
+  if (props.func === "signInOut") {
+  }
+
+  firebaseAuth.onAuthStateChanged((user) => {
+    console.log(user);
+    if (user) setSignInOutState(1);
+    else setSignInOutState(0);
+  });
+
+  function onClick(props) {
+    if (props.func === "signInOut") {
+      if (signInOutState === 1) {
+        console.log(signInOutState);
+        console.log("signing out");
+        return firebaseAuth.signOut();
+      } else return console.log("nothing");
+    }
+  }
+
   return (
     <NavLink
       to={props.path}
       style={({ isActive }) => (isActive ? activeStyle : unactiveStyle)}
+      onClick={onClick(props)}
+      // props.func === "signInOut" ? firebaseAuth.signOut() : undefined
     >
       <NavLinkText>{props.text}</NavLinkText>
     </NavLink>
@@ -67,6 +93,20 @@ function NavLinkNew(props) {
 // TODO: Create component for Navigation bar link that includes the NavLink component, the text, and styles. Have the active class keep the item colored
 
 export default function Navbar(props) {
+  const [signInOutText, setSignInOutText] = useState("Sign In");
+  const [signInOutPath, setSignInOutPath] = useState("/");
+
+  firebaseAuth.onAuthStateChanged((user) => {
+    console.log(user);
+    if (user) {
+      setSignInOutText("Sign Out");
+      setSignInOutPath("/");
+    } else {
+      setSignInOutText("Sign In");
+      setSignInOutPath("/login"); //change this to /checklist once popup is implemented
+    }
+  });
+
   return (
     <Nav id="nav-bar">
       <div id="nav-bar-content" style={NavBarContentStyle}>
@@ -89,7 +129,11 @@ export default function Navbar(props) {
         <div id="nav-bar-text" style={NavBarTextStyle}>
           <NavLinkNew path="/" text="Home" />
           <NavLinkNew path="/checklist" text="Checklist" />
-          <NavLinkNew path="/login" text="Login" />
+          <NavLinkNew
+            path={signInOutPath}
+            text={signInOutText}
+            func="signInOut"
+          />
           {/* <Link>Settings</Link> */}
         </div>
       </div>
