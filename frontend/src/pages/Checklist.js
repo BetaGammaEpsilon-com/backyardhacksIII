@@ -58,7 +58,6 @@ export default function Checklist() {
 
   return (
     <div id="checklist">
-      <p>checklist</p>
       <CategoryPanel id="completedPanel">
         <h1>Completed Parks</h1>
         {completedParkPanels}
