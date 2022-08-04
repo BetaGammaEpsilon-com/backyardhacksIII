@@ -1,12 +1,15 @@
 // Import packages
 import React from "react";
 import { useState } from "react";
-import { Link, NavLink, renderMatches } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { firebaseApp, firebaseAuth } from "../Firebase"; //Needed for other firebase components to reference the app
 
 // Import assets
 import logo from "../assets/images/compassLogo.svg";
+
+// Import components
+import DropDown from "../components/DropDown";
 
 const Nav = styled.nav`
   background-color: ${(props) => props.theme.colors.lightBrown};
@@ -93,18 +96,11 @@ function NavLinkNew(props) {
 // TODO: Create component for Navigation bar link that includes the NavLink component, the text, and styles. Have the active class keep the item colored
 
 export default function Navbar(props) {
-  const [signInOutText, setSignInOutText] = useState("Sign In");
-  const [signInOutPath, setSignInOutPath] = useState("/");
+  const [signInOutState, setSignInOutState] = useState(0);
 
   firebaseAuth.onAuthStateChanged((user) => {
-    console.log(user);
-    if (user) {
-      setSignInOutText("Sign Out");
-      setSignInOutPath("/");
-    } else {
-      setSignInOutText("Sign In");
-      setSignInOutPath("/login"); //change this to /checklist once popup is implemented
-    }
+    if (user) setSignInOutState(1);
+    else setSignInOutState(0);
   });
 
   return (
@@ -129,12 +125,7 @@ export default function Navbar(props) {
         <div id="nav-bar-text" style={NavBarTextStyle}>
           <NavLinkNew path="/" text="Home" />
           <NavLinkNew path="/checklist" text="Checklist" />
-          <NavLinkNew
-            path={signInOutPath}
-            text={signInOutText}
-            func="signInOut"
-          />
-          {/* <Link>Settings</Link> */}
+          {signInOutState ? <DropDown /> : <button>Hey</button>}
         </div>
       </div>
     </Nav>
