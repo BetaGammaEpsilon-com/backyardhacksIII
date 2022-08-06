@@ -37,7 +37,6 @@ const NavLinkText = styled.h3`
 const NavBarContentStyle = {
   width: "1000px",
   margin: "auto",
-  textAlign: "left",
   display: "flex",
   alignItems: "center",
 };
@@ -49,6 +48,7 @@ const NavBarTextStyle = {
   flex: "1 1 auto",
   justifyContent: "space-around",
   color: "white",
+  alignItems: "center",
 };
 
 function NavLinkNew(props) {
@@ -74,15 +74,13 @@ function NavLinkNew(props) {
 function Modal() {
   return (
     <Popup
-      trigger={<button className="sign-in-button"> Sign In </button>}
+      trigger={<NavLinkText className="sign-in-button"> Sign In </NavLinkText>}
       modal
     >
       <Login />
     </Popup>
   );
 }
-
-// TODO: Create component for Navigation bar link that includes the NavLink component, the text, and styles. Have the active class keep the item colored
 
 export default function Navbar(props) {
   const [signInOutState, setSignInOutState] = useState(0);
