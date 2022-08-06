@@ -1,10 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import firebase from "firebase/compat/app";
-import { firebaseApp, firebaseAuth } from "../Firebase"; //Needed for other firebase components to reference the app
-import * as firebaseui from "firebaseui";
-import "firebaseui/dist/firebaseui.css";
-
-var firebaseUi = new firebaseui.auth.AuthUI(firebaseAuth);
+import { firebaseApp, firebaseAuth, firebaseUi } from "../Firebase"; //Needed for other firebase components to reference the app
 
 var FirebaseUiConfig = {
   callbacks: {
@@ -38,26 +34,30 @@ var FirebaseUiConfig = {
   //privacyPolicyUrl: "<your-privacy-policy-url>",
 };
 
+const modalStyle = {
+  textAlign: "center",
+  borderStyle: "solid",
+  borderWidth: "1px",
+  borderColor: "#e6d6a6",
+  backgroundColor: "#809b52",
+  padding: "3px",
+};
+
 export default function Login() {
-  React.useEffect(() => {
+  useEffect(() => {
     firebaseUi.start("#firebaseui-auth-container", FirebaseUiConfig);
   }, []);
 
-  firebaseAuth.onAuthStateChanged((user) => {
-    console.log(user);
-    if (user)
-      document.getElementById("log-out-button").style.display = "inline-block";
-    else document.getElementById("log-out-button").style.display = "none";
-  });
+  //   firebaseAuth.onAuthStateChanged((user) => {
+  //     if (user) console.log(user);
+  //     else console.log(user);
+  //   });
 
   return (
-    <>
+    <div className="modal" style={modalStyle}>
       <div id="firebaseui-auth-container"></div>
       <div id="loader">Loading...</div>
       {/* <p id="sign-in-status">sample text</p> */}
-      <button onClick={firebaseAuth.signOut()} id="log-out-button">
-        Log Out
-      </button>
-    </>
+    </div>
   );
 }

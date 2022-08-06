@@ -4,12 +4,14 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { firebaseApp, firebaseAuth } from "../Firebase"; //Needed for other firebase components to reference the app
+import Popup from "reactjs-popup";
 
 // Import assets
 import logo from "../assets/images/compassLogo.svg";
 
 // Import components
 import DropDown from "../components/DropDown";
+import Login from "../components/Login";
 
 const Nav = styled.nav`
   background-color: ${(props) => props.theme.colors.lightBrown};
@@ -50,9 +52,6 @@ const NavBarTextStyle = {
 };
 
 function NavLinkNew(props) {
-  //0 is signed out, 1 is signed in
-  const [signInOutState, setSignInOutState] = useState(0);
-
   const activeStyle = {
     textDecoration: "none",
     textColor: "black",
@@ -62,34 +61,24 @@ function NavLinkNew(props) {
     textDecoration: "none",
   };
 
-  if (props.func === "signInOut") {
-  }
-
-  firebaseAuth.onAuthStateChanged((user) => {
-    console.log(user);
-    if (user) setSignInOutState(1);
-    else setSignInOutState(0);
-  });
-
-  function onClick(props) {
-    if (props.func === "signInOut") {
-      if (signInOutState === 1) {
-        console.log(signInOutState);
-        console.log("signing out");
-        return firebaseAuth.signOut();
-      } else return console.log("nothing");
-    }
-  }
-
   return (
     <NavLink
       to={props.path}
       style={({ isActive }) => (isActive ? activeStyle : unactiveStyle)}
-      onClick={onClick(props)}
-      // props.func === "signInOut" ? firebaseAuth.signOut() : undefined
     >
       <NavLinkText>{props.text}</NavLinkText>
     </NavLink>
+  );
+}
+
+function Modal() {
+  return (
+    <Popup
+      trigger={<button className="sign-in-button"> Sign In </button>}
+      modal
+    >
+      <Login />
+    </Popup>
   );
 }
 
@@ -125,7 +114,7 @@ export default function Navbar(props) {
         <div id="nav-bar-text" style={NavBarTextStyle}>
           <NavLinkNew path="/" text="Home" />
           <NavLinkNew path="/checklist" text="Checklist" />
-          {signInOutState ? <DropDown /> : <button>Hey</button>}
+          {signInOutState ? <DropDown /> : <Modal />}
         </div>
       </div>
     </Nav>

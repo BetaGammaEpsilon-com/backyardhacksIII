@@ -1,5 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import * as firebaseui from "firebaseui";
+import "firebaseui/dist/firebaseui.css";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -16,3 +18,6 @@ export const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // Export auth function
 export const firebaseAuth = firebase.auth();
+
+// Export FirebaseUI
+export const firebaseUi = new firebaseui.auth.AuthUI(firebaseAuth);
